@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <title>KerStore Parallel - Content Store</title>
+  <style>
+    :root{--bg:#49ffc7;--card:#fff;--accent:#18d5b9;--muted:#665}
+    body{font-family:system-ui,Arial;margin:0;background:#49ffc7;;color:#fff}
+    .wrap{max-width:1100px;margin:32px auto;padding:16px;}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    h1{margin:0;font-size:30px; font-family: "Kalam", cursive; text-shadow:
+        2px 2px 0 rgba(0,0,0,0.35),
+        4px 4px 12px rgba(0,0,0,0.45);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+    .card{background:#2311bd;border-radius:10px;padding:16px;box-shadow:0 6px 18px #111;}
+    .thumb{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#eee}
+    .title{font-weight:600; margin:10px 0 6px}
+    .desc{color:#18d5b9;font-size:14px;margin-bottom:8px}
+    .price{font-size:18px;font-weight:700;color:#18d5b9;margin-bottom:10px}
+    .btn{display:inline-block;padding:10px 12px;border-radius:8px;background:var(--accent);color:#2317bc;text-decoration:none}
+    .search{padding:8px 10px; box-shadow:0 6px 18px #111;border-radius:8px;border:1px solid #ddd;width:100%;max-width:360px}
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+    @media (max-width:520px){ .thumb{height:140px} }
+
+    .faq h2{margin-top:2rem;font-size:1.5rem;color:#fff}
+    .faq details{margin-bottom:1rem;background:#2311bd;padding:.8rem 1rem;border-radius:8px}
+    .faq summary{cursor:pointer;font-weight:600;color:#18d5b9}
+    .faq p{margin:0.5rem 0 0;color:#18d5b9}
+
+#faq {
+  max-width: 800px;         
+  margin: 0 auto;           
+  text-align: center;
+
+
+}
+
+#faq h2 {
+  text-align: left;
+  font-family: "Kalam", cursive;
+  text-shadow:
+        2px 2px 0 rgba(0,0,0,0.35),
+        4px 4px 12px rgba(0,0,0,0.45);
+}
+
+
+#faq details {
+  text-align: left;
+  margin: 0 auto;
+}
+
+.buttons a {
+  margin-right: 10px;      
+}
+
+
+.buttons a:last-child {
+  margin-right: ;
+}
+
+.buttons a {
+  display: inline-block;   
+  margin-bottom: 12px;     
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;  
+  gap: 12px;               
+}
+
+footer {
+  background-color: #2311bd; 
+  color: #49ffc7;           
+  padding: 1rem;            
+  text-align: center;      
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>KerStore Parallel</h1>
+      <input id="search" class="search" placeholder="Buscar produtos..." />
+    </header>
+
+    <div id="products" class="grid"></div>
+
+    
+   </div>
+
+
+
+
+<section id="faq" class="faq">
+  <h2>Perguntas Frequentes</h2>
+
+  <details open>
+    <<summary>Como recebo o produto depois da compra?</summary>
+        <p>
+          • <strong>Payhip (Mercado Pago / Stripe integrados)</strong>: o link de download é enviado automaticamente por e‑mail e aparece na página de confirmação do Payhip.<br>
+          • <strong>NowPayments ou Coinbase</strong>: o pagamento não gera entrega automática. Você receberá o conteúdo por e‑mail assim que confirmarmos o pagamento (até 24 h).
+        </p>
+      </details>
+    
+
+      <details>
+        <summary>Posso usar outro método de pagamento?</summary>
+        <p>Sim. Cada produto tem botões NowPayments ou Coinbase em Criptos, via Payhip, Mercado Pago / Stripe.</p>
+      </details>
+
+      <details>
+        <summary>O que faço se não receber o e‑mail?</summary>
+        <p>Verifique se você digitou o email corrento e a caixa de spam.</p>
+      </details>
+
+      <details>
+        <summary>Posso indica um amigo?</summary>
+        <p>Sim, você pode participar do programa de indicação 50/50 via Payhip.</p>
+  </details>
+</section>
+
+
+    <footer>
+      <div >Copyright © 2026 KerStore Parallel — Links de pagamento apontam para provedores externos. Hospedado no GitHub</div>
+    </footer>
+  </div>
+
+  <script>
+  // ---------- Produtos ----------
+  const PRODUCTS = [
+    {
+      id: 'p1',
+      title: 'Listas de Canais infantis',
+      description: 'Canais com Desenhos infantis em Varias Línguas.',
+      price: 50.00,
+      image: 'https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1j4e6avknafsq8r1u6s1t941iajr.png',
+      payLinks: [
+        { label: 'Payhip',  url: 'https://payhip.com/b/HuUwQ' },
+        { label: 'CoinBase',   url: 'https://commerce.coinbase.com/checkout/aad587c9-365e-42ef-b8d3-5f0d7bea8f17' },
+        { label: 'NowPayments',         url: 'https://nowpayments.io/payment/?iid=5740315077' }
+      ]
+    },   // <-- p1
+
+
+    {
+      id: 'p2',
+      title: 'Lista de canais Gospel',
+      description: 'Uma lista de canais sendo 5 infantis em Português.',
+      price: 20.00,
+      image: 'https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1j5ajiq6b2131hjtrkks2l164dr.png',
+      payLinks: [
+        { label: 'Payhip',  url: 'https://payhip.com/b/iwe01' },
+        { label: 'CoinBase',   url: 'https://commerce.coinbase.com/checkout/650cba9d-58d8-4f66-81a8-fc634290554d' },
+        { label: 'NowPayments',         url: 'https://nowpayments.io/payment/?iid=4357999822' }
+      ]
+    },   // <-- p2
+
+    {
+      id: 'p3',
+      title: 'Lista de Canais Baby Reborn',
+      description: 'Lista de Canais de Canais Para você assistir com sua Baby Reborn, Multilanguage.',
+      price: 30.00,
+      image: 'https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1j5finqf519nf11f6106sl40tlcr.png',
+      payLinks: [
+        { label: 'Payhip',  url: 'https://payhip.com/b/JNe0l' },
+        { label: 'Participa da Promoção', url: 'https://payhip.com/KerStore/blog/news' },
+        
+      ]
+    },   // <-- p3
+
+    {
+      id: 'p4a',
+      title: 'Lista de Canais de Viagem',
+      description: 'Lista com Canais para ver durante a viagem e quando você estive viajando.',
+      price: 40.00,
+      image: 'https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1jdr6qtpf1g51t8rcvjr24ahi15.png',
+      payLinks: [
+        { label: 'Payhip', url: 'https://payhip.com/b/Pqe5u' },
+        { label: 'CoinBase',   url: 'https://commerce.coinbase.com/checkout/17f272c1-97a8-4d6f-bdd8-75d43da76c65' },
+        { label: 'NowPayments',         url: 'https://nowpayments.io/payment/?iid=4481810844' }
+      ]
+    },   // <--  p4
+
+    {
+      id: 'p5a',
+      title: ' Antivírus Premium Security',
+      description: 'Proteção Premium de cibersegurança tudo-em-um',
+      price: 0.002,
+      image: 'https://www.malwarebytes.com/wp-content/uploads/sites/2/2024/05/MB5_Family-Android-Windows-0524.png?resize=1024,683',
+      payLinks: [
+        { label: 'Proteção Padrão',  url: 'https://shop.protectstar.com/pt/products/antivirus-ai-android?ref=Kalamon' },
+        { label: 'Com VPN',   url: 'https://adguard-vpn.com/promotion.html?aid=137124' },
+        { label: 'Com Proteção de Identidade',         url: 'https://shop.protectstar.com/pt/products/ishredder-windows?ref=Kalamon' }
+      ]
+    },   // <-- p5
+
+
+    {
+      id: 'p6',
+      title: 'Produtos Digitais de Segurança ',
+      description: 'Proteção contra Spyware, Exclusão segura com nível militar, Controle seu Tráfego de Dados.',
+      price: 0.003,
+      image: 'https://shop.protectstar.com/cdn/shop/files/s-p15w__ishredder-android.png?v=11547733245746481921',
+      payLinks: [
+        { label: 'Micro e Camera Guard',  url: 'https://shop.protectstar.com/pt/?ref=Kalamon' },
+        { label: 'Anti Spy',  url: 'https://shop.protectstar.com/pt/products/anti-spy-android?ref=Kalamon' },
+        { label: 'Triturador de Dados',   url: 'https://shop.protectstar.com/pt/products/ishredder-windows?ref=Kalamon' },
+        { label: 'Firewall AI',         url: 'https://shop.protectstar.com/pt/products/firewall-ai-android?ref=Kalamon' }
+      ]
+    },   // <-- p6
+
+    {
+      id: 'p7a',
+      title: 'VPN',
+      description: 'Acesse mais de 80 localidades e gerencie facilmente a proteção VPN para sites e aplicativos.',
+      price: 0.01,
+      image: 'https://cdn.adguard.com/public/Adguard/Blog/vpn/release/VPN_for_Mac/main-en.png?mw=1296',
+      payLinks: [
+        { label: 'Comprar Licença',  url: 'https://adguard-vpn.com/promotion.html?aid=137124' },
+        { label: 'Windows - Link direto',   url: 'https://download.adguardcdn.com/d/137124/adguardVPNInstaller.exe' },
+        { label: 'Android - Link direto',         url: 'https://download.adguardcdn.com/d/137124/android-vpn' }
+      ]
+    },   // <-- p7
+
+    {
+      id: 'p8a',
+      title: 'Bloqueador de Anúncios',
+      description: 'Navegue sem anúncios intrusivos. Bloqueie rastreadores e proteja sua privacidade online com facilidade.',
+      price: 0.005,
+      image: 'https://pe56d.s3.amazonaws.com/o_1jcas20871ecfk43j5ap681gba15.png',
+      payLinks: [
+        { label: 'Comprar Licença',  url: 'https://adguard.com/promotion.html?aid=137124' },
+        { label: 'Windows - Link direto',   url: 'https://download.adguardcdn.com/d/137124/adguardInstaller.exe' },
+        { label: 'Android - Link direto',         url: 'https://download.adguardcdn.com/d/137124/adguard.apk' }
+      ]
+    },    // <-- p8
+
+
+
+  ];      // <-- Fim do array dos Produtos
+
+
+
+  const productsEl = document.getElementById('products');
+  const searchEl   = document.getElementById('search');
+
+  function formatPrice(n){
+    return typeof n === 'number' && n % 1 !== 0
+      ? n + ' ETH'
+      : 'R$ ' + Number(n).toFixed(2).replace('.',',');
+  }
+
+  function escapeHtml(s){
+    return s?.replaceAll('&','&amp;')
+             .replaceAll('<','&lt;')
+             .replaceAll('>','&gt;')
+             .replaceAll('"','&quot;')
+             .replaceAll("'",'&#39;') ?? '';
+  }
+
+  // ---------- Renderização ----------
+  function createCard(p){
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <img class="thumb" src="${p.image}" alt="${escapeHtml(p.title)}" />
+      <div class="title">${escapeHtml(p.title)}</div>
+      <div class="desc">${escapeHtml(p.description)}</div>
+      <div class="price">${formatPrice(p.price)}</div>
+      <div class="buttons"></div>
+    `;
+
+    const btnContainer = div.querySelector('.buttons');
+    p.payLinks.forEach(link => {
+      const a = document.createElement('a');
+      a.className = 'btn';
+      a.href = link.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = link.label;
+      btnContainer.appendChild(a);
+    });
+
+    return div;
+  }
+
+  function renderList(list){
+    productsEl.innerHTML = '';
+    if (!list.length){
+      productsEl.innerHTML = '<div class="card">Nenhum produto encontrado.</div>';
+      return;
+    }
+    list.forEach(p => productsEl.appendChild(createCard(p)));
+  }
+
+  // ---------- Busca ----------
+  searchEl.addEventListener('input', () => {
+    const q = searchEl.value.trim().toLowerCase();
+    if (!q){
+      renderList(PRODUCTS);
+      return;
+    }
+    const filtered = PRODUCTS.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      (p.description || '').toLowerCase().includes(q)
+    );
+    renderList(filtered);
+  });
+
+  renderList(PRODUCTS);
+</script>
+
+</body>
+</html>
