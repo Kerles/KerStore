@@ -78,9 +78,22 @@ footer {
   padding: 1rem;            
   text-align: center;      
 }
-
+    
+    
   </style>
 </head>
+  <script>
+  (function(){
+    try {
+      fetch('https://kerstore-analytics.vercel.app/api/hit', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: location.pathname })
+      }).catch(()=>{});
+    } catch(e) {}
+  })();
+</script>
 <body>
   <div class="wrap">
     <header>
@@ -100,7 +113,7 @@ footer {
   <h2>Perguntas Frequentes</h2>
 
   <details open>
-    <<summary>Como recebo o produto depois da compra?</summary>
+    <summary>Como recebo o produto depois da compra?</summary>
         <p>
           • <strong>Payhip (Mercado Pago / Stripe integrados)</strong>: o link de download é enviado automaticamente por e‑mail e aparece na página de confirmação do Payhip.<br>
           • <strong>NowPayments ou Coinbase</strong>: o pagamento não gera entrega automática. Você receberá o conteúdo por e‑mail assim que confirmarmos o pagamento (até 24 h).
@@ -313,6 +326,7 @@ footer {
   });
 
   renderList(PRODUCTS);
+    
 </script>
 
 </body>
