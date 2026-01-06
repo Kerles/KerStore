@@ -327,6 +327,68 @@ footer {
 
   renderList(PRODUCTS);
     
+    <div id="kerstore-analytics">
+  <div id="ks-status">Carregando estatísticas…</div>
+  <div id="ks-hits" style="font-weight:600;margin-top:6px"></div>
+  <button id="ks-hit-btn" style="margin-top:8px">Enviar hit</button>
+</div>
+
+<script>
+(function () {
+  const API_BASE = 'https://kerstore-analytics.vercel.app';
+  const statusEl = document.getElementById('ks-status');
+  const hitsEl = document.getElementById('ks-hits');
+  const btn = document.getElementById('ks-hit-btn');
+
+  function setStatus(msg) { statusEl.textContent = msg; }
+  function setHits(n) { hitsEl.textContent = 'Hits: ' + n; }
+
+  async function fetchStats() {
+    try {
+      setStatus('Carregando estatísticas…');
+      const res = await fetch(API_BASE + '/api/stats', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Resposta não OK: ' + res.status);
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || 'Resposta inválida');
+      setHits(Number(json.value ?? 0));
+      setStatus('');
+    } catch (err) {
+      setStatus('Erro ao carregar estatísticas');
+      hitsEl.textContent = '';
+      console.error('fetchStats error:', err);
+    }
+  }
+
+  async function sendHit() {
+    try {
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+      const res = await fetch(API_BASE + '/api/hit', { method: 'POST' });
+      if (!res.ok) throw new Error('Resposta não OK: ' + res.status);
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || 'Resposta inválida');
+      setHits(Number(json.value ?? 0));
+      setStatus('Hit registrado');
+    } catch (err) {
+      setStatus('Erro ao enviar hit');
+      console.error('sendHit error:', err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar hit';
+      setTimeout(() => setStatus(''), 2000);
+    }
+  }
+
+  // Inicializa
+  fetchStats();
+  btn.addEventListener('click', sendHit);
+
+  // Atualiza periodicamente (opcional)
+  setInterval(fetchStats, 300_000); // a cada 300s
+})();
+</script>
+
+    
 </script>
 
 </body>
