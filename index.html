@@ -83,16 +83,10 @@ footer {
   </style>
 </head>
   <script>
-  (function(){
-    try {
-      fetch('https://kerstore-analytics.vercel.app/api/hit', {
-        method: 'POST',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ path: location.pathname })
-      }).catch(()=>{});
-    } catch(e) {}
-  })();
+ 
+  const VERSEL_HIT_URL = 'https://ker-store-stats.vercel.app/api/hit'
+    
+  fetch(VERSEL_HIT_URL, { method: 'POST', keepalive: true }).catch(()=>{})
 </script>
 <body>
   <div class="wrap">
