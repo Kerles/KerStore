@@ -82,12 +82,32 @@ footer {
     
   </style>
 </head>
-  <script>
- 
-  const VERSEL_HIT_URL = 'https://ker-store-stats.vercel.app/api/hit'
-    
-  fetch(VERSEL_HIT_URL, { method: 'POST', keepalive: true }).catch(()=>{})
-</script>
+   <script>
+        async function fetchStats() {
+            try {
+                const response = await fetch('https://ker-store-stats.vercel.app/api/stats');
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+
+                const data = await response.json();
+
+               
+                if (data && Array.isArray(data.stats)) { 
+                    data.stats.map(item => {
+                        console.log(item);
+                    });
+                } else {
+                    console.error('Dados inválidos:', data);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar as estatísticas:', error);
+            }
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', fetchStats);
+    </script>
 <body>
   <div class="wrap">
     <header>
